@@ -12,7 +12,7 @@ Ensuite:
 ```bash
 cd /is3/projects/MB_201905_WGS
 source modules
-cp -r scripts/20190529_Cupsaliensis scripts/20190530_NomDeLanalyse
+cp -r scripts/template scripts/20190530_NomDeLanalyse
 ```
 
 On modifie ensuite les en-têtes des scripts avec les valeurs souhaitées.
