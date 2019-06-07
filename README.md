@@ -25,6 +25,19 @@ bash scripts/20190530_NomDeLanalyse/02_blast.sh
 Rscript scripts/20190530_NomDeLanalyse/03_blast_analysis.R
 ```
 
+**Important**: On retrouve maintenant une valeur `ref_name` qui correspond à la
+référence. Il est donc possible de réutiliser une référence qui a été créé lors
+d'une analyse précédente.
+
+Par exemple, si on souhaite refaire une analyse avec la référence
+`20190530_Cupsaliensis`, on fera les étapes suivantes:
+
+1. Copier le répertoire template pour créer notre nouveau répertoire d'analyse
+2. Modifier les en-têtes:
+    * Pour la valeur `ref_name`, on mettra `20190530_Cupsaliensis`
+    * Pour la valeur `analysis_name`, on mettra le nom de l'analyse courante
+3. Lancer les scripts dans l'ordre habituel
+
 ## Version longue
 
 ### Répertoire de travail
@@ -40,24 +53,20 @@ Les scripts se trouvent dans le répertoire `scripts`:
 
 ```bash
 scripts
-└── 20190529_Cupsaliensis
+└── template
     ├── 01_download.R
     ├── 02_blast.sh
     └── 03_blast_analysis.R
 ```
 
 Pour éviter de retrouver un trop grand nombre de fichiers, un répertoire sera
-créé pour chaque analyse. Dans cet exemple, on retrouve le répertoire
-`20190529_Cupsaliensis`, qui correspond à l'analyse de tous les génomes de *C.
-upsaliensis*.
-
-Pour une nouvelle analyse, il s'agira donc de copier ce répertoire en lui
-donnant le nom de la nouvelle analyse. Il est recommandé d'inclure la date du
-début des analyses dans le nom de l'analyse pour qu'il soit plus facile de s'y
-retrouver dans le futur.
+créé pour chaque analyse. Pour une nouvelle analyse, il s'agira donc de copier
+ce répertoire en lui donnant le nom de la nouvelle analyse. Il est recommandé
+d'inclure la date du début des analyses dans le nom de l'analyse pour qu'il
+soit plus facile de s'y retrouver dans le futur.
 
 ```bash
-cp -r scripts/20190529_Cupsaliensis scripts/20190530_NomDeLanalyse
+cp -r scripts/template scripts/20190530_NomDeLanalyse
 ```
 
 On doit ensuite modifier les en-têtes des fichiers de scripts pour y inclure
@@ -70,6 +79,7 @@ Pour le script `scripts/20190530_NomDeLanalyse/01_download.R`:
 # section à modifier
 pattern <- "campylobacter upsaliensis" # Le critère de la recherche
 analysis_name <- "20190529_Cupsaliensis" # Le nom du répertoire pour les résultats de l'analyse
+ref_name="20190530_Cupsaliensis" # Le nom du fichier de référence
 
 strict <- FALSE # Est-ce que le critère de recherche doit être identique
 verbose <- TRUE # Détails de l'analyse
@@ -83,6 +93,7 @@ Pour le script `scripts/20190530_NomDeLanalyse/02_blast.sh`:
 ```bash
 # section à modifier
 analysis_name="20190529_Cupsaliensis" # Le nom du répertoire pour les résultats de l'analyse
+ref_name="20190530_Cupsaliensis" # Le nom du fichier de référence
 min_length=500 # Taille minimale des alignements à conserver
 input=input_fasta/groel.fa # Fichier fasta à aligner
 ```
